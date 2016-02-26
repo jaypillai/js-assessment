@@ -16,15 +16,14 @@ exports.functionsAnswers = {
   },
 
   makeClosures : function(arr, fn) {
-    var myVals = [];
-    for(i=0;i<arr.length;i++){
-
-      (function(index){
-        myVals.push(fn(arr[index]));
-      })(i);
+    var myArr = [];
+    var returnFun = function(val) {
+      return function() { return fn(val); };
+    };
+    for (var i = 0; i < arr.length; i++) {
+      myArr.push(returnFun(arr[i]));
     }
-
-    return myVals;
+    return myArr;
 
   },
 
